@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/routing/app_routes.dart';
+import 'package:ecommerce_app/features/address/address_screen.dart';
 import 'package:ecommerce_app/features/auth/login_screen.dart';
 import 'package:ecommerce_app/features/auth/register_screen.dart';
 import 'package:ecommerce_app/features/main_screen/main_screen.dart';
@@ -27,6 +28,11 @@ class RouterGenerationConfig {
       name: AppRoutes.productScreen,
       path: AppRoutes.productScreen,
       builder: (context, state) => const ProductScreen(),
+    ),
+    GoRoute(
+      name: AppRoutes.addressScreen,
+      path: AppRoutes.addressScreen,
+      builder: (context, state) => const AddressScreen(),
     ),
   ]);
 }

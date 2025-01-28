@@ -1,10 +1,13 @@
 class AppAssets {
-  static const String onBoard = "assets/images/onBoard1.png";
-  static const String profileImage = "assets/images/profile.jpg";
-  static const String layer1 = "assets/images/layer1.png";
-  static const String layer2 = "assets/images/layer2.png";
+  static const iconsPath = 'assets/icons/';
 
-  static const String facebookSVGIcon = "assets/icons/facebook.svg";
-  static const String googleSVGIcon = "assets/icons/google.svg";
-  static const String appleSVGIcon = "assets/icons/apple.svg";
+  static const String box = '${iconsPath}Box.png';
+
+  static const String address = '${iconsPath}Address.png';
+
+  static const String details = '${iconsPath}Details.png';
+
+  static const String question = '${iconsPath}Headphones.png';
+
+  static const String help = '${iconsPath}Question.png';
 }
