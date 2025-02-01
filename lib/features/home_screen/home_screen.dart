@@ -27,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String selectedCat = "";
+  String selectedCat = "All";
   @override
   void initState() {
     context.read<ProductCubit>().fetchProducts();
@@ -144,8 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: product.title ?? "",
                               price: product.price.toString(),
                               onTap: () {
-                                GoRouter.of(context)
-                                    .pushNamed(AppRoutes.productScreen);
+                                GoRouter.of(context).pushNamed(
+                                    AppRoutes.productScreen,
+                                    extra: product);
                               });
                         }).toList()),
                   ),
