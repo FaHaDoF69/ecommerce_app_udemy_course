@@ -46,6 +46,10 @@ dependencies:
   animated_snack_bar: ^0.4.0
   get_it: ^8.0.3
   flutter_secure_storage: ^9.2.4
+  flutter_staggered_animations: ^1.1.1
+  page_transition: ^2.2.1
+  go_transitions: ^0.7.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

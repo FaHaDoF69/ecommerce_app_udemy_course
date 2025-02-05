@@ -17,7 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -109,9 +111,29 @@ class _HomeScreenState extends State<HomeScreen> {
           BlocBuilder<ProductCubit, ProductState>(
             builder: (context, state) {
               if (state is ProductLoading) {
-                return LoadingWidget(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.5,
+                return Expanded(
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 8.sp,
+                        crossAxisSpacing: 16.sp,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemCount: 6,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.amber,
+                          ),
+                          width: 150.w,
+                          height: 120.h,
+                        );
+                      },
+                    ),
+                  ),
                 );
               }
               if (state is ProductLoaded) {
@@ -127,28 +149,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: AppColors.primaryColor,
                     backgroundColor: Colors.white,
                     onRefresh: () async {
-                      selectedCat = "";
+                      selectedCat = "All";
                       setState(() {});
                       context.read<ProductCubit>().fetchProducts();
                     },
-                    child: GridView(
+                    child: AnimationLimiter(
+                      child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 8.sp,
                           crossAxisSpacing: 16.sp,
-                          childAspectRatio: 0.8,
+                          childAspectRatio: 0.65,
                         ),
-                        children: products.map((product) {
-                          return ProductItemWidget(
-                              image: product.image ?? "",
-                              title: product.title ?? "",
-                              price: product.price.toString(),
-                              onTap: () {
-                                GoRouter.of(context).pushNamed(
-                                    AppRoutes.productScreen,
-                                    extra: product);
-                              });
-                        }).toList()),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          return AnimationConfiguration.staggeredList(
+                            position: index,
+                            duration: const Duration(milliseconds: 500),
+                            child: SlideAnimation(
+                              verticalOffset: 200.0,
+                              child: FadeInAnimation(
+                                child: ProductItemWidget(
+                                  image: products[index].image ?? "",
+                                  title: products[index].title ?? "",
+                                  price: products[index].price.toString(),
+                                  onTap: () {
+                                    GoRouter.of(context).pushNamed(
+                                        AppRoutes.productScreen,
+                                        extra: products[index]);
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 );
               }

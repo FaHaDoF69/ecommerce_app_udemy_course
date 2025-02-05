@@ -35,7 +35,10 @@ class ProductScreen extends StatelessWidget {
                   Container(
                     width: 341.w,
                     height: 341.h,
-                    child: CachedNetworkImage(imageUrl: product.image ?? ""),
+                    child: Hero(
+                        tag: "product${product.title}",
+                        child:
+                            CachedNetworkImage(imageUrl: product.image ?? "")),
                   ),
                   const HeightSpace(12),
                   Text(

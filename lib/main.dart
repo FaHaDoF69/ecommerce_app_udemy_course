@@ -4,6 +4,7 @@ import 'package:ecommerce_app/core/styling/theme_data.dart';
 import 'package:ecommerce_app/core/utils/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_transitions/go_transitions.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

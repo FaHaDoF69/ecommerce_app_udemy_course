@@ -38,12 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     username = TextEditingController();
     password = TextEditingController();
-
-    sl<StorageHelper>().getToken().then((value) {
-      if (value != null && value.isNotEmpty) {
-        context.pushReplacementNamed(AppRoutes.mainScreen);
-      }
-    });
   }
 
   @override
