@@ -9,6 +9,7 @@ class CustomTextField extends StatelessWidget {
   final bool? isPassword;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final String? defaultValue;
   const CustomTextField(
       {super.key,
       this.hintText,
@@ -16,10 +17,18 @@ class CustomTextField extends StatelessWidget {
       this.width,
       this.isPassword,
       this.controller,
-      this.validator});
+      this.validator,
+      this.defaultValue});
 
   @override
   Widget build(BuildContext context) {
+    // Set default value if controller and defaultValue are provided
+    if (controller != null &&
+        defaultValue != null &&
+        controller!.text.isEmpty) {
+      controller!.text = defaultValue!;
+    }
+
     return SizedBox(
         width: width ?? 331.w,
         child: TextFormField(
